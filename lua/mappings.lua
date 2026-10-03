@@ -2,21 +2,37 @@ require "nvchad.mappings"
 
 -- add yours here
 
-local map = vim.keymap.set
+-- local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+vim.keymap.set("n", ";", ":", { desc = "CMD enter command mode" })
+vim.keymap.set("i", "jk", "<ESC>")
 -- Gán Space + f + s để mở Document Symbols qua Telescope
-map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Telescope LSP symbols" })
+vim.keymap.set("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Telescope LSP symbols" })
 -- Tìm kiếm Symbol trên TOÀN BỘ WORKSPACE
-map(
+vim.keymap.set(
   "n",
   "<leader>fS",
   "<cmd>Telescope lsp_workspace_symbols<CR>",
   { desc = "Telescope LSP workspace symbols" }
 )
 -- Gán phím tắt Space + g + g để mở Neogit
-map("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Mở giao diện Neogit (Git Control)" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Mở giao diện Neogit (Git Control)" })
 -- Nhấn ESC để thoát chế độ nhập liệu trong Terminal
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = "Thoát chế độ nhập liệu Terminal" })
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Thoát chế độ nhập liệu Terminal" })
+-- Chia màn hình dọc bằng Space + v
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", { desc = "Chia màn hình Dọc" })
+
+-- Chia màn hình ngang bằng Space + s
+vim.keymap.set("n", "<leader>s", "<cmd>split<CR>", { desc = "Chia màn hình Ngang" })
+
+-- Đóng ô màn hình hiện tại bằng Space + q
+vim.keymap.set("n", "<leader>q", "<cmd>close<CR>", { desc = "Đóng ô màn hình hiện tại" })
+-- Phóng to hết cỡ CHIỀU NGANG (Full Width) bằng Space + |
+vim.keymap.set("n", "<leader>|", "<C-w>|", { desc = "Max width current panel" })
+
+-- Phóng to hết cỡ CHIỀU CAO (Full Height) bằng Space + _
+vim.keymap.set("n", "<leader>_", "<C-w>_", { desc = "Max height current panel" })
+
+-- Chia đều lại tất cả các ô cửa sổ bằng Space + =
+vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equalize all panels" })
 
