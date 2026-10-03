@@ -36,3 +36,7 @@ vim.keymap.set("n", "<leader>_", "<C-w>_", { desc = "Max height current panel" }
 -- Chia đều lại tất cả các ô cửa sổ bằng Space + =
 vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equalize all panels" })
 
+-- Phóng to cửa sổ hiện tại thành 1 Tab riêng (Full screen)
+vim.keymap.set("n", "<leader>z", "<cmd>tab split<CR>", { desc = "Zoom window into tab" })
+-- Thu nhỏ lại (Thực chất là đóng tab đó đi để về layout cũ)
+vim.keymap.set("n", "<leader>Z", "<cmd>tabclose<CR>", { desc = "Close zoomed tab" })
