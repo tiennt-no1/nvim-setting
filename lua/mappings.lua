@@ -17,3 +17,6 @@ map(
 )
 -- Gán phím tắt Space + g + g để mở Neogit
 map("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Mở giao diện Neogit (Git Control)" })
+-- Nhấn ESC để thoát chế độ nhập liệu trong Terminal
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = "Thoát chế độ nhập liệu Terminal" })
+
