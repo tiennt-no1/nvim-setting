@@ -64,8 +64,8 @@ map(
 
 
 -- Gán Ctrl + Shift + P (và Ctrl + P, do terminal không phân biệt) để mở Commands Palette
-map({ "n", "i", "v" }, "<C-S-p>", "<cmd>Telescope commands<CR>", { desc = "Search Commands Palette" })
-map("n", "<leader>sc", "<cmd>Telescope commands<CR>", { desc = "Search Commands" })
+map({ "n", "i", "v" }, "<C-S-p>", "<cmd>Telescope cmdline<CR>", { desc = "Search Commands Palette" })
+map("n", "<leader>sc", "<cmd>Telescope cmdline<CR>", { desc = "Search Commands" })
 
 
 -- Tìm kiếm nhanh các Phím tắt (Keymaps) đang hoạt động
