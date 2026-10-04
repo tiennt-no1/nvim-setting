@@ -1,21 +1,12 @@
 require "nvchad.mappings"
 
--- add yours here
-
--- local map = map
 local map = vim.keymap.set
-
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 -- Gán Space + f + s để mở Document Symbols qua Telescope
 map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Telescope LSP symbols" })
 -- Tìm kiếm Symbol trên TOÀN BỘ WORKSPACE
-map(
-  "n",
-  "<leader>fS",
-  "<cmd>Telescope lsp_workspace_symbols<CR>",
-  { desc = "Telescope LSP workspace symbols" }
-)
+map("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Telescope LSP workspace symbols" })
 -- Gán phím tắt Space + g + g để mở Neogit
 map("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Mở giao diện Neogit (Git Control)" })
 -- Nhấn ESC để thoát chế độ nhập liệu trong Terminal
@@ -46,16 +37,27 @@ map("n", "<leader>Z", "<cmd>tabclose<CR>", { desc = "Close zoomed tab" })
 map("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Find recent projects" })
 
 -- Khôi phục session của project hiện tại (Giống LazyVim <leader>qs)
-map("n", "<leader>qs", function() require("persistence").load() end, { desc = "Restore Session" })
+map("n", "<leader>qs", function()
+  require("persistence").load()
+end, { desc = "Restore Session" })
 
 -- Khôi phục session cuối cùng trước khi thoát (Giống LazyVim <leader>ql)
-map("n", "<leader>ql", function() require("persistence").load({ last = true }) end, { desc = "Restore Last Session" })
-
+map("n", "<leader>ql", function()
+  require("persistence").load { last = true }
+end, { desc = "Restore Last Session" })
 
 -- 1. Tìm kiếm & Thay thế TRÊN TOÀN PROJECT (Giống Ctrl+Shift+F trong VSCode)
 map("n", "<leader>sp", '<cmd>lua require("spectre").open()<CR>', { desc = "Spectre: Open Project Search" })
-map("n", "<leader>sf", '<cmd>lua require("spectre").open_file_search()<CR>', { desc = "Spectre: Open Current File Search" })
+map(
+  "n",
+  "<leader>sf",
+  '<cmd>lua require("spectre").open_file_search()<CR>',
+  { desc = "Spectre: Open Current File Search" }
+)
 
-map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Spectre: Search current word" })
-
-
+map(
+  "n",
+  "<leader>sw",
+  '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+  { desc = "Spectre: Search current word" }
+)
