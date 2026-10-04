@@ -61,3 +61,12 @@ map(
   '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
   { desc = "Spectre: Search current word" }
 )
+
+
+-- Gán Ctrl + Shift + P (và Ctrl + P, do terminal không phân biệt) để mở Commands Palette
+map({ "n", "i", "v" }, "<C-S-p>", "<cmd>Telescope commands<CR>", { desc = "Search Commands Palette" })
+map("n", "<leader>sc", "<cmd>Telescope commands<CR>", { desc = "Search Commands" })
+
+
+-- Tìm kiếm nhanh các Phím tắt (Keymaps) đang hoạt động
+map("n", "<leader>sk", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" })
