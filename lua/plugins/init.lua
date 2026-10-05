@@ -1,9 +1,9 @@
 return {
-  {
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    opts = require "configs.conform",
-  },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   -- event = 'BufWritePre', -- uncomment for format on save
+  --   opts = require "configs.conform",
+  -- },
 
   -- These are some examples, uncomment them if you want to see them work!
   {
@@ -83,5 +83,16 @@ return {
     opts = {
       -- your config goes here
     },
+  },
+  -- Gỡ bỏ các plugin LSP/Cmp mặc định của NvChad
+  { "williamboman/mason.nvim", enabled = false },
+  { "neovim/nvim-lspconfig", enabled = false },
+  { "hrsh7th/nvim-cmp", enabled = false },
+  { "L3MON4D3/LuaSnip", enabled = false },
+  -- Cài đặt CoC.nvim thay the
+  {
+    "neoclide/coc.nvim",
+    branch = "release",
+    lazy = false, -- CoC cần chạy ngay khi khởi động
   },
  }

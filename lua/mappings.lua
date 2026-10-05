@@ -1,25 +1,25 @@
 require "nvchad.mappings"
 -- Mở giao diện GrugFar ở chế độ bình thường (Normal Mode)
 local map = vim.keymap.set
-map('n', '<leader>sf', function()
-  require('grug-far').open()
-end, { desc = 'GrugFar: Mở trình tìm kiếm và thay thế' })
+map("n", "<leader>sf", function()
+  require("grug-far").open()
+end, { desc = "GrugFar: Mở trình tìm kiếm và thay thế" })
 
-map('n', '<leader>sw', function()
-  require('grug-far').open({ prefills = { search = vim.fn.expand("<cword>") } })
-end, { desc = 'GrugFar: Tìm từ dưới con trỏ' })
+map("n", "<leader>sw", function()
+  require("grug-far").open { prefills = { search = vim.fn.expand "<cword>" } }
+end, { desc = "GrugFar: Tìm từ dưới con trỏ" })
 
 -- Mở GrugFar với đoạn VĂN BẢN đang được bôi đen (Visual Mode)
-map('v', '<leader>sf', function()
-  require('grug-far').with_visual_selection()
-end, { desc = 'GrugFar: Tìm đoạn văn bản được chọn' })
+map("v", "<leader>sf", function()
+  require("grug-far").with_visual_selection()
+end, { desc = "GrugFar: Tìm đoạn văn bản được chọn" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 -- Gán Space + f + s để mở Document Symbols qua Telescope
-map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Telescope LSP symbols" })
+-- map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Telescope LSP symbols" })
 -- Tìm kiếm Symbol trên TOÀN BỘ WORKSPACE
-map("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Telescope LSP workspace symbols" })
+-- map("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Telescope LSP workspace symbols" })
 -- Gán phím tắt Space + g + g để mở Neogit
 map("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Mở giao diện Neogit (Git Control)" })
 -- Nhấn ESC để thoát chế độ nhập liệu trong Terminal
@@ -28,10 +28,10 @@ map("t", "<leader>qt", [[<C-\><C-n>]], { desc = "Thoát chế độ nhập liệ
 map("n", "<leader>wv", "<cmd>vsplit<CR>", { desc = "Chia màn hình Dọc" })
 
 -- Chia màn hình ngang bằng Space + ws
-map("n", "<leader>ws", "<cmd>split<CR>", { desc = "Chia màn hình Ngang" })
+map("n", "<leader>s", "<cmd>split<CR>", { desc = "Chia màn hình Ngang" })
 
 -- Đóng ô màn hình hiện tại bằng Space + q
-map("n", "<leader>wq", "<cmd>close<CR>", { desc = "Đóng ô màn hình hiện tại" })
+map("n", "<leader>x", "<cmd>close<CR>", { desc = "Đóng ô màn hình hiện tại" })
 -- Phóng to hết cỡ CHIỀU NGANG (Full Width) bằng Space + |
 map("n", "<leader>|", "<C-w>|", { desc = "Max width current panel" })
 
@@ -59,46 +59,92 @@ map("n", "<leader>ql", function()
   require("persistence").load { last = true }
 end, { desc = "Restore Last Session" })
 
-
-map(
-  "n",
-  "<leader>sw",
-  '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
-  { desc = "Spectre: Search current word" }
-)
-
-
 -- Gán Ctrl + Shift + P (và Ctrl + P, do terminal không phân biệt) để mở Commands Palette
 map({ "n", "i", "v" }, "<C-S-p>", "<cmd>Telescope cmdline<CR>", { desc = "Search Commands Palette" })
-map("n", "<leader>sc", "<cmd>Telescope cmdline<CR>", { desc = "Search Commands" })
-
+map("n", "<leader>fc", "<cmd>Telescope cmdline<CR>", { desc = "Search Commands" })
 
 -- Tìm kiếm nhanh các Phím tắt (Keymaps) đang hoạt động
-map("n", "<leader>sk", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" })
 
-map("n", "<leader>k", function()
-  require("lsp-selection-range").update("expand")
-end, { desc = "LSP Selection: Init/Expand" })
+map("n", "<leader>gb", function()
+  require("gitsigns").toggle_current_line_blame()
+end, { desc = "Git: Bật/Tắt Git Blame dòng hiện tại" })
 
--- Nhấn Leader + k ở Visual mode để MỞ RỘNG (Expand)
-map("x", "<leader>k", function()
-  require("lsp-selection-range").update("expand")
-end, { desc = "LSP Selection: Expand" })
+-- ==========================================================================
+-- CẤU HÌNH PHÍM TẮT COC.NVIM VỚI VIM.KEYMAP.SET
+-- ==========================================================================
 
--- Nhấn Leader + j ở Visual mode để THU HẸP (Shrink)
-map("x", "<leader>j", function()
-  require("lsp-selection-range").update("shrink")
-end, { desc = "LSP Selection: Shrink" })
+-- 1. Các hàm phụ trợ cho Phím Tab và phím K
+local function check_backspace()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s" ~= nil
+end
 
+local function show_documentation()
+  if vim.fn.CocAction("hasProvider", "hover") == 1 then
+    vim.fn.CocActionAsync "doHover"
+  else
+    vim.fn.feedkeys("K", "in")
+  end
+end
 
-map('n', '<leader>gb', function()
-  require('gitsigns').toggle_current_line_blame()
-end, { desc = 'Git: Bật/Tắt Git Blame dòng hiện tại' })
--- Nhấn <leader>gb để bật/tắt Git Blame cho dòng hiện tại
-map('n', '<leader>gb', function()
-  require('gitsigns').toggle_current_line_blame()
-end, { desc = 'Git: Bật/Tắt Git Blame dòng hiện tại' })
+-- 2. Định nghĩa phím tắt sử dụng local map
+local expr_opts = { silent = true, expr = true, replace_keycodes = false }
+local silent_opts = { silent = true }
 
-map('n', '<leader>gb', function()
-  require('gitsigns').toggle_current_line_blame()
-end, { desc = 'Git: Bật/Tắt Git Blame dòng hiện tại' })
+-- --- Chế độ Insert (Auto-complete) ---
+-- Dùng Tab / Shift-Tab để điều hướng danh sách gợi ý
+map("i", "<TAB>", function()
+  if vim.fn["coc#pum#visible"]() == 1 then
+    return vim.fn["coc#pum#next"](1)
+  elseif check_backspace() then
+    return "<Tab>"
+  else
+    return vim.fn["coc#refresh"]()
+  end
+end, expr_opts)
+
+map("i", "<S-TAB>", function()
+  if vim.fn["coc#pum#visible"]() == 1 then
+    return vim.fn["coc#pum#prev"](1)
+  else
+    return "<C-h>"
+  end
+end, expr_opts)
+
+-- Nhấn Enter để chọn từ đang chọn
+map("i", "<CR>", function()
+  if vim.fn["coc#pum#visible"]() == 1 then
+    return vim.fn["coc#pum#confirm"]()
+  else
+    return "<C-g>u<CR><c-r>=coc#on_enter()<CR>"
+  end
+end, expr_opts)
+
+-- --- Chế độ Normal (Điều hướng & Sửa lỗi) ---
+-- Định nghĩa vị trí Code (Go to Definition, References...)
+map("n", "gd", "<Plug>(coc-definition)", silent_opts)
+map("n", "gy", "<Plug>(coc-type-definition)", silent_opts)
+map("n", "gi", "<Plug>(coc-implementation)", silent_opts)
+map("n", "gr", "<Plug>(coc-references)", silent_opts)
+
+-- Xem tài liệu giải thích hàm (Hover)
+map("n", "K", show_documentation, silent_opts)
+
+-- Đổi tên biến/hàm trên toàn dự án (Rename)
+map("n", "<leader>rn", "<Plug>(coc-rename)", silent_opts)
+
+-- Sửa lỗi nhanh tại vị trí con trỏ (Quick Fix / Code Action)
+map("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", silent_opts)
+map("n", "<leader>qf", "<Plug>(coc-fix-current)", silent_opts)
+
+-- Di chuyển qua lại giữa các lỗi (Diagnostics)
+map("n", "[g", "<Plug>(coc-diagnostic-prev)", silent_opts)
+map("n", "]g", "<Plug>(coc-diagnostic-next)", silent_opts)
+
+-- --- Tìm kiếm Ký hiệu (Symbols) ---
+-- <leader>so : Tìm hàm/biến trong FILE HIỆN TẠI (Symbol Outline / Document Symbols)
+map("n", "<leader>fs", ":<C-u>CocList outline<CR>", silent_opts)
+
+-- <leader>sp : Tìm hàm/biến trên TOÀN BỘ DỰ ÁN (Workspace Symbols)
+map("n", "<leader>fS", ":<C-u>CocList -I symbols<CR>", silent_opts)
