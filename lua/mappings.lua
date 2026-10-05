@@ -140,7 +140,7 @@ map("n", "<leader>qf", "<Plug>(coc-fix-current)", silent_opts)
 
 -- Di chuyển qua lại giữa các lỗi (Diagnostics)
 map("n", "[g", "<Plug>(coc-diagnostic-prev)", silent_opts)
-map("n", "]g", "<Plug>(coc-diagnostic-next)", silent_opts)
+map("n", "]g", "<Plug>(coc-diagnostic-next)", silent_opts):
 
 -- --- Tìm kiếm Ký hiệu (Symbols) ---
 -- <leader>so : Tìm hàm/biến trong FILE HIỆN TẠI (Symbol Outline / Document Symbols)
@@ -148,3 +148,17 @@ map("n", "<leader>fs", ":<C-u>CocList outline<CR>", silent_opts)
 
 -- <leader>sp : Tìm hàm/biến trên TOÀN BỘ DỰ ÁN (Workspace Symbols)
 map("n", "<leader>fS", ":<C-u>CocList -I symbols<CR>", silent_opts)
+--- Tìm kiếm File trong dự án ---
+-- <leader><space> : Tìm kiếm file nhanh (tương tự như Telescope find_files hoặc CtrlP)
+map("n", "<leader><space>", ":<C-u>CocList files<CR>", silent_opts)
+
+-- [<leader>tt] : Ẩn / Hiện Terminal hiện tại (Toggle)
+map("n", "<leader>tt", ":CocCommand terminal.Toggle<CR>", silent_opts)
+map("t", "<leader>tt", "<C-\\><C-n>:CocCommand terminal.Toggle<CR>", silent_opts)
+
+-- [<leader>tn] : Tạo một Terminal MỚI hoàn toàn (Terminal New)
+map("n", "<leader>tn", ":CocCommand terminal.Create<CR>", silent_opts)
+map("t", "<leader>tn", "<C-\\><C-n>:CocCommand terminal.Create<CR>", silent_opts)
+
+-- Cửa sổ quản lý danh sách: Xem và chọn Terminal đang chạy
+map("n", "<leader>tl", ":CocList terminals<CR>", silent_opt)
