@@ -90,7 +90,6 @@ end
 
 -- 2. Định nghĩa phím tắt sử dụng local map
 local expr_opts = { silent = true, expr = true, replace_keycodes = false }
-local silent_opts = { silent = true }
 
 -- --- Chế độ Insert (Auto-complete) ---
 -- Dùng Tab / Shift-Tab để điều hướng danh sách gợi ý
@@ -123,42 +122,39 @@ end, expr_opts)
 
 -- --- Chế độ Normal (Điều hướng & Sửa lỗi) ---
 -- Định nghĩa vị trí Code (Go to Definition, References...)
-map("n", "gd", "<Plug>(coc-definition)", silent_opts)
-map("n", "gy", "<Plug>(coc-type-definition)", silent_opts)
-map("n", "gi", "<Plug>(coc-implementation)", silent_opts)
-map("n", "gr", "<Plug>(coc-references)", silent_opts)
+map("n", "gd", "<Plug>(coc-definition)", { silent = true })
+map("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
+map("n", "gi", "<Plug>(coc-implementation)", { silent = true })
+map("n", "gr", "<Plug>(coc-references)", { silent = true })
 
 -- Xem tài liệu giải thích hàm (Hover)
-map("n", "K", show_documentation, silent_opts)
+map("n", "K", show_documentation, { silent = true })
 
 -- Đổi tên biến/hàm trên toàn dự án (Rename)
-map("n", "<leader>rn", "<Plug>(coc-rename)", silent_opts)
+map("n", "<leader>rn", "<Plug>(coc-rename)", { silent = true })
 
 -- Sửa lỗi nhanh tại vị trí con trỏ (Quick Fix / Code Action)
-map("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", silent_opts)
-map("n", "<leader>qf", "<Plug>(coc-fix-current)", silent_opts)
+map("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", { silent = true })
+map("n", "<leader>qf", "<Plug>(coc-fix-current)", { silent = true })
 
 -- Di chuyển qua lại giữa các lỗi (Diagnostics)
-map("n", "[g", "<Plug>(coc-diagnostic-prev)", silent_opts)
-map("n", "]g", "<Plug>(coc-diagnostic-next)", silent_opts):
-
--- --- Tìm kiếm Ký hiệu (Symbols) ---
--- <leader>so : Tìm hàm/biến trong FILE HIỆN TẠI (Symbol Outline / Document Symbols)
-map("n", "<leader>fs", ":<C-u>CocList outline<CR>", silent_opts)
+map("n", "[g", "<Plug>(coc-diagnostic-prev)", { silent = true })
+map("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
+map("n", "<leader>fs", ":<C-u>CocList outline<CR>", { silent = true })
 
 -- <leader>sp : Tìm hàm/biến trên TOÀN BỘ DỰ ÁN (Workspace Symbols)
-map("n", "<leader>fS", ":<C-u>CocList -I symbols<CR>", silent_opts)
+map("n", "<leader>fS", ":<C-u>CocList -I symbols<CR>", { silent = true })
 --- Tìm kiếm File trong dự án ---
 -- <leader><space> : Tìm kiếm file nhanh (tương tự như Telescope find_files hoặc CtrlP)
-map("n", "<leader><space>", ":<C-u>CocList files<CR>", silent_opts)
+map("n", "<leader><space>", ":<C-u>CocList files<CR>", { silent = true })
 
 -- [<leader>tt] : Ẩn / Hiện Terminal hiện tại (Toggle)
-map("n", "<leader>tt", ":CocCommand terminal.Toggle<CR>", silent_opts)
-map("t", "<leader>tt", "<C-\\><C-n>:CocCommand terminal.Toggle<CR>", silent_opts)
+map("n", "<leader>tt", ":CocCommand terminal.Toggle<CR>", { silent = true })
+map("t", "<leader>tt", "<C-\\><C-n>:CocCommand terminal.Toggle<CR>", { silent = true })
 
 -- [<leader>tn] : Tạo một Terminal MỚI hoàn toàn (Terminal New)
-map("n", "<leader>tn", ":CocCommand terminal.Create<CR>", silent_opts)
-map("t", "<leader>tn", "<C-\\><C-n>:CocCommand terminal.Create<CR>", silent_opts)
+map("n", "<leader>tn", ":CocCommand terminal.Create<CR>", { silent = true })
+map("t", "<leader>tn", "<C-\\><C-n>:CocCommand terminal.Create<CR>", { silent = true })
 
 -- Cửa sổ quản lý danh sách: Xem và chọn Terminal đang chạy
-map("n", "<leader>tl", ":CocList terminals<CR>", silent_opt)
+map("n", "<leader>tl", ":CocList terminals<CR>", {silent = true })

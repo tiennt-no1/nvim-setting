@@ -6,12 +6,12 @@ return {
   -- },
 
   -- These are some examples, uncomment them if you want to see them work!
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "configs.lspconfig"
-    end,
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   config = function()
+  --     require "configs.lspconfig"
+  --   end,
+  -- },
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -89,6 +89,8 @@ return {
   { "neovim/nvim-lspconfig", enabled = false },
   { "hrsh7th/nvim-cmp", enabled = false },
   { "L3MON4D3/LuaSnip", enabled = false },
+  { "hrsh7th/cmp-nvim-lsp", enabled = false },
+
   -- Cài đặt CoC.nvim thay the
   {
     "neoclide/coc.nvim",
