@@ -53,56 +53,35 @@ return {
         patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
       }
       -- Tích hợp vào bộ tìm kiếm Telescope
-      require("telescope").load_extension("projects")
+      require("telescope").load_extension "projects"
     end,
   },
   -- Các plugin khác...
-
-  {
-    "nvim-pack/nvim-spectre",
-    build = false,
-    cmd = "Spectre",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+ {
+    'MagicDuck/grug-far.nvim',
+    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+    -- additional lazy config to defer loading is not really needed...
     config = function()
-      require("spectre").setup({
-        open_cmd = "vnew", -- Mở giao diện ở thanh dọc bên cạnh giống VSCode Sidebar
-        live_update = true, -- Xem kết quả thay đổi ngay khi gõ (Real-time)
-        line_sep_start = '┌-----------------------------------------',
-        result_padding = '│  ',
-        line_sep       = '└-----------------------------------------',
-      })
-    end,
+      -- optional setup call to override plugin options
+      -- alternatively you can set options with vim.g.grug_far = { ... }
+      require('grug-far').setup({
+        -- options, see Configuration section below
+        -- there are no required options atm
+      });
+    end
   },
   {
-  'prochri/telescope-all-recent.nvim',
-  dependencies = {
-    "nvim-telescope/telescope.nvim",
-    "kkharji/sqlite.lua",
-    "jonarrien/telescope-cmdline.nvim",
+    "prochri/telescope-all-recent.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "kkharji/sqlite.lua",
+      "jonarrien/telescope-cmdline.nvim",
 
-    -- optional, if using telescope for vim.ui.select
-    "stevearc/dressing.nvim"
-  },
-  opts =
-    {
+      -- optional, if using telescope for vim.ui.select
+      "stevearc/dressing.nvim",
+    },
+    opts = {
       -- your config goes here
-    }
-}
-
-
-
-  -- test new blink
-  -- { import = "nvchad.blink.lazyspec" },
-
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
-}
+    },
+  },
+ }

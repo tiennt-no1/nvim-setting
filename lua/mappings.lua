@@ -1,6 +1,19 @@
 require "nvchad.mappings"
-
+-- Mở giao diện GrugFar ở chế độ bình thường (Normal Mode)
 local map = vim.keymap.set
+map('n', '<leader>sf', function()
+  require('grug-far').open()
+end, { desc = 'GrugFar: Mở trình tìm kiếm và thay thế' })
+
+map('n', '<leader>sw', function()
+  require('grug-far').open({ prefills = { search = vim.fn.expand("<cword>") } })
+end, { desc = 'GrugFar: Tìm từ dưới con trỏ' })
+
+-- Mở GrugFar với đoạn VĂN BẢN đang được bôi đen (Visual Mode)
+map('v', '<leader>sf', function()
+  require('grug-far').with_visual_selection()
+end, { desc = 'GrugFar: Tìm đoạn văn bản được chọn' })
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 -- Gán Space + f + s để mở Document Symbols qua Telescope
@@ -46,14 +59,6 @@ map("n", "<leader>ql", function()
   require("persistence").load { last = true }
 end, { desc = "Restore Last Session" })
 
--- 1. Tìm kiếm & Thay thế TRÊN TOÀN PROJECT (Giống Ctrl+Shift+F trong VSCode)
-map("n", "<leader>sp", '<cmd>lua require("spectre").open()<CR>', { desc = "Spectre: Open Project Search" })
-map(
-  "n",
-  "<leader>sf",
-  '<cmd>lua require("spectre").open_file_search()<CR>',
-  { desc = "Spectre: Open Current File Search" }
-)
 
 map(
   "n",
@@ -70,3 +75,30 @@ map("n", "<leader>sc", "<cmd>Telescope cmdline<CR>", { desc = "Search Commands" 
 
 -- Tìm kiếm nhanh các Phím tắt (Keymaps) đang hoạt động
 map("n", "<leader>sk", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" })
+
+map("n", "<leader>k", function()
+  require("lsp-selection-range").update("expand")
+end, { desc = "LSP Selection: Init/Expand" })
+
+-- Nhấn Leader + k ở Visual mode để MỞ RỘNG (Expand)
+map("x", "<leader>k", function()
+  require("lsp-selection-range").update("expand")
+end, { desc = "LSP Selection: Expand" })
+
+-- Nhấn Leader + j ở Visual mode để THU HẸP (Shrink)
+map("x", "<leader>j", function()
+  require("lsp-selection-range").update("shrink")
+end, { desc = "LSP Selection: Shrink" })
+
+
+map('n', '<leader>gb', function()
+  require('gitsigns').toggle_current_line_blame()
+end, { desc = 'Git: Bật/Tắt Git Blame dòng hiện tại' })
+-- Nhấn <leader>gb để bật/tắt Git Blame cho dòng hiện tại
+map('n', '<leader>gb', function()
+  require('gitsigns').toggle_current_line_blame()
+end, { desc = 'Git: Bật/Tắt Git Blame dòng hiện tại' })
+
+map('n', '<leader>gb', function()
+  require('gitsigns').toggle_current_line_blame()
+end, { desc = 'Git: Bật/Tắt Git Blame dòng hiện tại' })
