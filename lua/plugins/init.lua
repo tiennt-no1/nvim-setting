@@ -1,17 +1,4 @@
 return {
-  -- {
-  --   "stevearc/conform.nvim",
-  --   -- event = 'BufWritePre', -- uncomment for format on save
-  --   opts = require "configs.conform",
-  -- },
-
-  -- These are some examples, uncomment them if you want to see them work!
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   config = function()
-  --     require "configs.lspconfig"
-  --   end,
-  -- },
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -90,6 +77,8 @@ return {
   { "hrsh7th/nvim-cmp", enabled = false },
   { "L3MON4D3/LuaSnip", enabled = false },
   { "hrsh7th/cmp-nvim-lsp", enabled = false },
+  -- { "windwp/nvim-autopairs", enabled = false },
+
 
   -- Cài đặt CoC.nvim thay the
   {

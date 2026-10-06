@@ -111,15 +111,6 @@ map("i", "<S-TAB>", function()
   end
 end, expr_opts)
 
--- Nhấn Enter để chọn từ đang chọn
-map("i", "<CR>", function()
-  if vim.fn["coc#pum#visible"]() == 1 then
-    return vim.fn["coc#pum#confirm"]()
-  else
-    return "<C-g>u<CR><c-r>=coc#on_enter()<CR>"
-  end
-end, expr_opts)
-
 -- --- Chế độ Normal (Điều hướng & Sửa lỗi) ---
 -- Định nghĩa vị trí Code (Go to Definition, References...)
 map("n", "gd", "<Plug>(coc-definition)", { silent = true })
@@ -145,16 +136,11 @@ map("n", "<leader>fs", ":<C-u>CocList outline<CR>", { silent = true })
 -- <leader>sp : Tìm hàm/biến trên TOÀN BỘ DỰ ÁN (Workspace Symbols)
 map("n", "<leader>fS", ":<C-u>CocList -I symbols<CR>", { silent = true })
 --- Tìm kiếm File trong dự án ---
--- <leader><space> : Tìm kiếm file nhanh (tương tự như Telescope find_files hoặc CtrlP)
-map("n", "<leader><space>", ":<C-u>CocList files<CR>", { silent = true })
 
--- [<leader>tt] : Ẩn / Hiện Terminal hiện tại (Toggle)
-map("n", "<leader>tt", ":CocCommand terminal.Toggle<CR>", { silent = true })
-map("t", "<leader>tt", "<C-\\><C-n>:CocCommand terminal.Toggle<CR>", { silent = true })
+-- [ <leader><space> ] : Tìm kiếm file nhanh (Yêu cầu đã chạy :CocInstall coc-lists)
+map("n", "<leader><space>", ":<C-u>CocList files<CR>", { silent = true, desc = "CoC: Find Files" })
 
--- [<leader>tn] : Tạo một Terminal MỚI hoàn toàn (Terminal New)
-map("n", "<leader>tn", ":CocCommand terminal.Create<CR>", { silent = true })
-map("t", "<leader>tn", "<C-\\><C-n>:CocCommand terminal.Create<CR>", { silent = true })
-
--- Cửa sổ quản lý danh sách: Xem và chọn Terminal đang chạy
-map("n", "<leader>tl", ":CocList terminals<CR>", {silent = true })
+-- [ <leader>tt ] : Ẩn / Hiện Terminal hiện tại (Toggle)
+-- Sửa chữ 'Toggle' thành 'toggle' viết thường
+map("n", "<leader>tt", ":CocCommand terminal.Toggle<CR>", { silent = true, desc = "CoC: Toggle Terminal" })
+map("t", "<leader>tt", "<C-\\><C-n>:CocCommand terminal.Toggle<CR>", { silent = true, desc = "CoC: Toggle Terminal (Terminal Mode)" })
